@@ -4,7 +4,7 @@
     <persistence-units>
       <persistence-unit name="Default">
         <packages>
-          <package value="com.delport.site" />
+          <package value="com.domain.site" />
         </packages>
       </persistence-unit>
     </persistence-units>
