@@ -1,4 +1,4 @@
-package com.example.delport;
+package com.example.delport.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
