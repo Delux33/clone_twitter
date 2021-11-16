@@ -52,7 +52,6 @@ public class MainController {
         return "main";
     }
 
-
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
