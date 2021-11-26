@@ -17,14 +17,14 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank(message = "Username cannot be empty")
+    @NotBlank(message = "Username can not be empty")
     private String username;
-    @NotBlank(message = "Password cannot be empty")
+    @NotBlank(message = "Password can not be empty")
     private String password;
     private boolean active;
 
     @Email(message = "Email is not correct")
-    @NotBlank(message = "Email cannot be empty")
+    @NotBlank(message = "Email can not be empty")
     private String email;
     private String activationCode;
 

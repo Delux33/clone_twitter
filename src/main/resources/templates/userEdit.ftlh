@@ -2,7 +2,6 @@
 
 <@c.page>
 User editor
-
 <form action="/user" method="post">
     <input type="text" name="username" value="${user.username}" />
     <#list roles as role>
@@ -12,6 +11,6 @@ User editor
     </#list>
     <input type="hidden" value="${user.id}" name="userId">
     <input type="hidden" value="${_csrf.token}" name="_csrf">
-    <button type="submit">Save</button>
+    <button class="btn btn-outline-secondary" type="submit">Save</button>
 </form>
 </@c.page>

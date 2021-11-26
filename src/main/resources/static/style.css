@@ -1,3 +1,125 @@
 body {
     color: #113;
 }
+
+.logout {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 15px;
+    color: #383d48;
+}
+.logout span {
+    display: block;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    line-height: 1;
+    transition: .4s ease;
+}
+.logout:after {
+    content: '\e820';
+    font-family: Linearicons-Free;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 27px;
+}
+.logout:hover span {
+    max-width: 200px;
+    opacity: 1;
+    margin-right: 6px;
+}
+
+.login {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 15px;
+    color: #383d48;
+}
+.login span {
+    display: block;
+    text-decoration: none;
+    color: #383d48;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    line-height: 1;
+    transition: .4s ease;
+}
+.login:after {
+    content: '\e81f';
+    color: #383d48;
+    font-family: Linearicons-Free;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 27px;
+}
+.login:hover span {
+    max-width: 200px;
+    text-decoration: none;
+    opacity: 1;
+    margin-right: 6px;
+}
+
+.searchbar {
+    width: 300px
+    margin-right: 6px;
+    height: 5px;
+    border: none;
+    outline: none;
+    border-radius: 10rem;
+    padding: 1rem;
+    transition: all .1s;
+    transition-delay: .1s;
+}
+.search-button {
+    position: absolute;
+    top: -0.1rem;
+    right: 1.5rem;
+    transition: all .1s;
+    transition-delay: .1s;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    opacity: ;
+}
+.search-button:hover {
+    cursor: pointer;
+}
+.searchbar::placeholder {
+    opacity: .2;
+}
+
+.add-user-button:after {
+   content: '\e82a';
+   color: #383d48;
+   font-family: Linearicons-Free;
+   line-height: 0;
+   font-size: 25px;
+   position: relative;
+   top: 0.5rem;
+   left: 0.5rem;
+   text-decoration: none;
+}

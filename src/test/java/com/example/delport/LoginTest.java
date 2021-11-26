@@ -1,6 +1,6 @@
 package com.example.delport;
 
-import com.example.delport.controller.MainController;
+import com.example.delport.controller.ControllerMain;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,15 +21,15 @@ public class LoginTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MainController controller;
+    private ControllerMain controllerMain;
 
     @Test
     public void contextLoads() throws Exception {
         this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello, guest")))
-                .andExpect(content().string(containsString("This is a simple site")));
+                .andExpect(content().string(containsString("Hello, guest!")))
+                .andExpect(content().string(containsString("This is a simple site like twitter and stepik")));
     }
 
     @Test

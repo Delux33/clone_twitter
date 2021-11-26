@@ -1,7 +1,7 @@
 package com.example.delport.controller;
 
 import com.example.delport.domain.User;
-import com.example.delport.domain.dto.CaptchaResponseDto;
+import com.example.delport.domain.captcha.Captcha;
 import com.example.delport.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Controller
-public class RegistrationController {
+public class ControllerRegistration {
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
     @Autowired
@@ -47,7 +47,7 @@ public class RegistrationController {
             Model model) {
 
         String url = String.format(CAPTCHA_URL, secret, captchaResponce);
-        CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
+        Captcha response = restTemplate.postForObject(url, Collections.emptyList(), Captcha.class);
 
         if (!Objects.requireNonNull(response).isSuccess()) {
             model.addAttribute("captchaError", "Fill captcha");
@@ -56,7 +56,7 @@ public class RegistrationController {
         boolean isConfirmNotEmpty = StringUtils.hasText(passwordConfirm);
 
         if (!isConfirmNotEmpty) {
-            model.addAttribute("password2Error", "Password confirmation cannot be empty");
+            model.addAttribute("password2Error", "Password confirmation can not be empty");
         }
 
         if (user.getPassword() != null && !user.getPassword().equals(passwordConfirm)) {
@@ -65,7 +65,7 @@ public class RegistrationController {
         }
 
         if (!isConfirmNotEmpty || bindingResult.hasErrors() || !Objects.requireNonNull(response).isSuccess()) {
-            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+            Map<String, String> errors = ControllerError.getErrors(bindingResult);
 
             model.mergeAttributes(errors);
 

@@ -1,76 +1,90 @@
 <#macro login path isRegisterForm>
 <form action="${path}" method="post">
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">User Name :</label>
-        <div class="col-sm-4">
-            <input type="text" name="username" value="<#if user??>${user.username}</#if>"
-                   class="form-control ${(usernameError??)?string('is-invalid', '')}"
-                   placeholder="User name" />
+    <div class="form-group">
+        <label class="col-form-label">User Name</label>
+        <input type="text" name="username" value="<#if user??>${user.username}</#if>"
+               class="form-control col-sm-3 ${(usernameError??)?string('is-invalid', '')}"
+               placeholder="User name" />
             <#if usernameError??>
                <div class="invalid-feedback">
                     ${usernameError}
                </div>
             </#if>
-        </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password :</label>
-        <div class="col-sm-4">
-            <input type="password" name="password"
-                   class="form-control ${(passwordError??)?string('is-invalid', '')}"
-                   placeholder="Password" />
+    <div class="form-group">
+        <label class="col-form-label">Password</label>
+        <input type="password" name="password"
+               class="form-control col-sm-3 ${(passwordError??)?string('is-invalid', '')}"
+               placeholder="Password" />
             <#if passwordError??>
                 <div class="invalid-feedback">
                     ${passwordError}
                 </div>
             </#if>
-        </div>
     </div>
     <#if isRegisterForm>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Retype password :</label>
-        <div class="col-sm-4">
-            <input type="password" name="password2"
-                   class="form-control ${(password2Error??)?string('is-invalid', '')}"
-                   placeholder="Retype password" />
+    <div class="form-group">
+        <label class="col-form-label">Retype password</label>
+        <input type="password" name="password2"
+               class="form-control col-sm-3 ${(password2Error??)?string('is-invalid', '')}"
+               placeholder="Retype password" />
             <#if password2Error??>
                 <div class="invalid-feedback">
                     ${password2Error}
                 </div>
             </#if>
-        </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Email :</label>
-        <div class="col-sm-4">
-            <input type="email" name="email" value="<#if user??>${user.email}</#if>"
-                   class="form-control ${(emailError??)?string('is-invalid', '')}"
-                   placeholder="example@example.com" />
+    <div class="form-group">
+        <label class="col-form-label">Email</label>
+        <input type="email" name="email" value="<#if user??>${user.email}</#if>"
+               class="form-control col-sm-3 ${(emailError??)?string('is-invalid', '')}"
+               placeholder="example@example.com" />
             <#if emailError??>
                 <div class="invalid-feedback">
                     ${emailError}
                 </div>
+            <#else>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else</small>
             </#if>
-        </div>
     </div>
-    <div class="col-sm-4">
-        <div class="g-recaptcha" data-sitekey="6LeFzjYdAAAAAK92S1kZT8Bp0INh0ET71RIbnA8W"></div>
+    <div class="form-group">
         <#if captchaError??>
+        <div class="form-group">
             <div class="alert alert-danger" role="alert">
                 ${captchaError}
             </div>
-        </#if>
+        </div>
+    </#if>
+        <div class="g-recaptcha" data-sitekey="6LeFzjYdAAAAAK92S1kZT8Bp0INh0ET71RIbnA8W"></div>
+        </hl>
     </div>
 </#if>
-<input type="hidden" name="_csrf" value="${_csrf.token}" />
-<#if !isRegisterForm><a href="/registration">Add new user</a></#if>
-<button class="btn btn-primary" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+            <button class="btn btn-outline-secondary" type="submit">
+                <#if isRegisterForm>
+                Create
+                <#else>
+                Sign In
+            </#if></button>
+            <#if !isRegisterForm>
+            <a class="add-user-button ml-4" href="/registration"></a>
+            <#else>
+            <small class="text-muted">
+                <label class="col-form-label ml-1">Already a delportor?</label>
+                <a class="text" href="/login"><span><b>Log In</b></span></a>
+            </small>
+            </#if>
+       </div>
+    </div>
+</form>
 </form>
 </#macro>
 
 <#macro logout>
 <form action="/logout" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
-    <button class="btn btn-primary" type="submit">Sign Out</button>
+    <button class="btn btn-outline-secondary" type="submit">Sign out of your delport</button>
 </form>
 </#macro>
