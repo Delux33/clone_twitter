@@ -15,12 +15,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class ServiceUser implements UserDetailsService {
     @Autowired
     private UserRepo userRepo;
 
     @Autowired
-    private MailService mailService;
+    private ServiceMail mailService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -126,5 +126,17 @@ public class UserService implements UserDetailsService {
         if (isEmailChanged) {
             sendMessage(user);
         }
+    }
+
+    public void subscribe(User currentUser, User user) {
+        user.getSubscribers().add(currentUser);
+
+        userRepo.save(user);
+    }
+
+    public void unsubscribe(User currentUser, User user) {
+        user.getSubscribers().remove(currentUser);
+
+        userRepo.save(user);
     }
 }

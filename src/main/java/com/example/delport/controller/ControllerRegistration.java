@@ -2,7 +2,7 @@ package com.example.delport.controller;
 
 import com.example.delport.domain.User;
 import com.example.delport.domain.captcha.Captcha;
-import com.example.delport.service.UserService;
+import com.example.delport.service.ServiceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class ControllerRegistration {
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
     @Autowired
-    private UserService userService;
+    private ServiceUser userService;
 
     @Value("${recaptcha.secret}")
     private String secret;

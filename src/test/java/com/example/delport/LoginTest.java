@@ -1,6 +1,6 @@
 package com.example.delport;
 
-import com.example.delport.controller.ControllerMain;
+import com.example.delport.controller.ControllerMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +21,7 @@ public class LoginTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ControllerMain controllerMain;
+    private ControllerMessage controllerMessage;
 
     @Test
     public void contextLoads() throws Exception {
