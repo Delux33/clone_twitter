@@ -41,12 +41,12 @@ public class ControllerRegistration {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam("password2") String passwordConfirm,
-            @RequestParam("g-recaptcha-response") String captchaResponce,
+            @RequestParam("g-recaptcha-response") String captchaResponse,
             @Valid User user,
             BindingResult bindingResult,
             Model model) {
 
-        String url = String.format(CAPTCHA_URL, secret, captchaResponce);
+        String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         Captcha response = restTemplate.postForObject(url, Collections.emptyList(), Captcha.class);
 
         if (!Objects.requireNonNull(response).isSuccess()) {

@@ -87,7 +87,7 @@ public class ControllerMessage {
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
 
-        return "/main";
+        return "redirect:/main";
     }
 
     private void saveFile(Message message, MultipartFile file) throws IOException {

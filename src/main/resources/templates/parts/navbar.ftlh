@@ -22,15 +22,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="/user/profile">Profile</a>
             </li>
-            <form method="get" action="/main" class="form-inline ml-5">
-                <input type="search" name="searchPeople" maxlength="20" class="searchbar" value="${searchPeople?ifExists}" placeholder="Search people" />
-                <a href="/"><img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" width="15" height="15" alt="search icon" class="search-button"></a>
+            <form method="post" action="filter" class="form-inline ml-5">
+                <input name="search" maxlength="20" class="searchbar" placeholder="Search users" />
             </form>
+            <a href="/">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" width="15" height="15" alt="search icon" class="search-button">
+            </a>
         </#if>
     </div>
     </ul>
     <#if isAdmin>
-        <a class="navbar-text mr-3" href="/user">User list</a>
+        <a class="navbar-text mr-3" href="/user">List of users</a>
     </#if>
     <#if user??>
         <div class="navbar-text">${name}</div>

@@ -64,10 +64,11 @@
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <button class="btn btn-outline-secondary" type="submit">
                 <#if isRegisterForm>
-                Create
+                    Create
                 <#else>
-                Sign In
-            </#if></button>
+                    Sign In
+                </#if>
+            </button>
             <#if !isRegisterForm>
             <a class="add-user-button ml-4" href="/registration"></a>
             <#else>

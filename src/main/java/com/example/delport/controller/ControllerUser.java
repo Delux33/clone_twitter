@@ -16,12 +16,12 @@ import java.util.Map;
 @RequestMapping("/user")
 public class ControllerUser {
     @Autowired
-    private ServiceUser userService;
+    private ServiceUser serviceUser;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userCatalog(Model model) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", serviceUser.findAll());
 
         return "userCatalog";
     }
@@ -42,7 +42,7 @@ public class ControllerUser {
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user) {
 
-        userService.saveUser(user, username, form);
+        serviceUser.saveUser(user, username, form);
 
         return "redirect:/user";
     }
@@ -61,7 +61,7 @@ public class ControllerUser {
             @RequestParam String password,
             @RequestParam String email) {
 
-        userService.updateProfile(user, password, email);
+        serviceUser.updateProfile(user, password, email);
 
         return "redirect:/user/profile";
     }
@@ -72,7 +72,7 @@ public class ControllerUser {
             @PathVariable User user
     ) {
 
-        userService.subscribe(currentUser, user);
+        serviceUser.subscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getId();
     }
@@ -83,7 +83,7 @@ public class ControllerUser {
             @PathVariable User user
     ) {
 
-        userService.unsubscribe(currentUser, user);
+        serviceUser.unsubscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getId();
     }
@@ -105,5 +105,15 @@ public class ControllerUser {
         }
 
         return "subscriptions";
+    }
+
+    @GetMapping("search")
+    public String users(
+            Model model,
+            @PathVariable String username
+    ) {
+        model.addAttribute("user", serviceUser.loadUserByUsername(username));
+
+        return "redirect:/user";
     }
 }

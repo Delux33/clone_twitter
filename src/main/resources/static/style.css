@@ -96,7 +96,7 @@ body {
 }
 .search-button {
     position: absolute;
-    top: -0.1rem;
+    top: 0.4rem;
     right: 1.5rem;
     transition: all .1s;
     transition-delay: .1s;
