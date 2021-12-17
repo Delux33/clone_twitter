@@ -1,34 +1,34 @@
-create table message
+CREATE TABLE message
 (
-    id       int8          not null auto_increment,
-    filename varchar(255),
-    tag      varchar(255),
-    text     varchar(2048) not null,
-    user_id  int8,
-    primary key (id)
+    id       INT8          NOT NULL AUTO_INCREMENT,
+    filename VARCHAR(255),
+    tag      VARCHAR(255),
+    text     VARCHAR(2048) NOT NULL,
+    user_id  INT8,
+    PRIMARY KEY (id)
 );
 
-create table user_role
+CREATE TABLE user_role
 (
-    user_id int8 not null,
-    roles   varchar(255)
+    user_id INT8 NOT NULL,
+    roles   VARCHAR(255)
 );
 
-create table usr
+CREATE TABLE usr
 (
-    id              int8         not null auto_increment,
-    activation_code varchar(255),
-    active          boolean      not null,
-    email           varchar(255),
-    password        varchar(255) not null,
-    username        varchar(255) not null,
-    primary key (id)
+    id              INT8         NOT NULL AUTO_INCREMENT,
+    activation_code VARCHAR(255),
+    active          BOOLEAN      NOT NULL,
+    email           VARCHAR(255),
+    password        VARCHAR(255) NOT NULL,
+    username        VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
 );
 
-alter table message
-    add constraint message_user_fk
-        foreign key (user_id) references usr (id);
+ALTER TABLE message
+    ADD CONSTRAINT message_user_fk
+        FOREIGN KEY (user_id) REFERENCES usr (id);
 
-alter table user_role
-    add constraint user_role_user_fk
-        foreign key (user_id) references usr (id);
+ALTER TABLE user_role
+    ADD CONSTRAINT user_role_user_fk
+        FOREIGN KEY (user_id) REFERENCES usr (id);
