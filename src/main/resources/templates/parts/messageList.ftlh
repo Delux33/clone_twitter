@@ -20,6 +20,10 @@
                     <a class="col btn btn-light" href="/user-messages/${message.author.id}?message=${message.id}">
                         Edit
                     </a>
+                    <form method="post" action="/delete/${message.id}">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                        <button class="col btn btn-light" type="submit">Delete</button>
+                    </form>
                 </#if>
             </div>
         </div>
