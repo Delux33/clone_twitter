@@ -1,1 +1,1 @@
-With pagination
+# This is a simple site like the twitter
