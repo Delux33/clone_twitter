@@ -70,7 +70,7 @@ public class ServiceUser implements UserDetailsService {
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
-       if (user == null) {
+        if (user == null) {
             return false;
         }
 
@@ -80,6 +80,10 @@ public class ServiceUser implements UserDetailsService {
         userRepo.save(user);
 
         return true;
+    }
+
+    public User findUser(String userName) {
+        return userRepo.findByUsername(userName);
     }
 
     public List<User> findAll() {
@@ -108,9 +112,9 @@ public class ServiceUser implements UserDetailsService {
         String userEmail = user.getEmail();
 
         boolean isEmailChanged = (email != null && !email.equals(userEmail)) ||
-                (userEmail !=null && !userEmail.equals(email));
+                (userEmail != null && !userEmail.equals(email));
 
-        if(isEmailChanged) {
+        if (isEmailChanged) {
             user.setEmail(email);
 
             if (StringUtils.hasText(email)) {

@@ -1,9 +1,15 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a href="/user-messages/${user.id}">${user.getUsername()}</a>
-        </li>
-    </ul>
+    <#if user??>
+        <div class="col-sm-3 mx-auto">
+            <h3>
+                <a class="nav-link" href="/user-messages/${user.id}">${user.username}</a>
+            </h3>
+        </div>
+    <#else>
+        <div class="col-sm-3 mx-auto">
+            <h3>User not found</h3>
+        </div>
+    </#if>
 </@c.page>

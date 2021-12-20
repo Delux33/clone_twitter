@@ -15,11 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -47,7 +47,7 @@ public class ControllerMessage {
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter,
                        Model model,
-                       @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Page<Message> page = serviceMessage.messageList(pageable, filter);
 
@@ -65,7 +65,7 @@ public class ControllerMessage {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file") MultipartFile file,
-            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) throws IOException {
         message.setAuthor(user);
 
@@ -108,12 +108,12 @@ public class ControllerMessage {
     }
 
     @GetMapping("/user-messages/{author}")
-    public  String userMessages(
+    public String userMessages(
             @AuthenticationPrincipal User currentUser,
             @PathVariable User author,
             Model model,
             @RequestParam(required = false) Message message,
-            @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
 
         Page<Message> page = serviceMessage.messageListForUser(pageable, author);
@@ -131,7 +131,7 @@ public class ControllerMessage {
     }
 
     @PostMapping("/user-messages/{user}")
-    public  String updateMessage(
+    public String updateMessage(
             @AuthenticationPrincipal User currentUser,
             @PathVariable Long user,
             @RequestParam("id") Message message,
@@ -154,5 +154,21 @@ public class ControllerMessage {
         }
 
         return "redirect:/user-messages/" + user;
+    }
+
+    @PostMapping("/user-messages")
+    public String deleteMessage(
+            @RequestParam("messageId") Long messageId,
+            RedirectAttributes redirectAttributes,
+            @RequestHeader(required = false) String referer) {
+
+        serviceMessage.deleteMessage(messageId);
+
+        UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
+
+        components.getQueryParams()
+                .forEach(redirectAttributes::addAttribute);
+
+        return "redirect:" + components.getPath();
     }
 }

@@ -1,16 +1,19 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-User editor
-<form action="/user" method="post">
-    <input type="text" name="username" value="${user.username}" />
-    <#list roles as role>
-    <div>
-        <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>
-    </div>
-    </#list>
-    <input type="hidden" value="${user.id}" name="userId">
-    <input type="hidden" value="${_csrf.token}" name="_csrf">
-    <button class="btn btn-outline-secondary" type="submit">Save</button>
-</form>
+    <form action="/user" method="post">
+        <div class="form-group">
+            <label class="col-form-label">User name</label>
+            <input class="form-control col-sm-3 mb-1" type="text" name="username" value="${user.username}" placeholder="Username">
+        </div>
+        <#list roles as role>
+            <div class="form-check">
+                <input class="form-check-input position-static mr-2 mb-3" type="checkbox"
+                       name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}
+            </div>
+        </#list>
+        <input type="hidden" value="${user.id}" name="userId">
+        <input type="hidden" value="${_csrf.token}" name="_csrf">
+        <button class="btn btn-outline-secondary" type="submit">Save</button>
+    </form>
 </@c.page>

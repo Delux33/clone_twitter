@@ -3,12 +3,16 @@ package com.example.delport.controller;
 import com.example.delport.domain.Role;
 import com.example.delport.domain.User;
 import com.example.delport.service.ServiceUser;
+import com.jayway.jsonpath.internal.filter.ValueNodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 
@@ -21,6 +25,7 @@ public class ControllerUser {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userCatalog(Model model) {
+
         model.addAttribute("users", serviceUser.findAll());
 
         return "userCatalog";
@@ -108,12 +113,22 @@ public class ControllerUser {
     }
 
     @GetMapping("search")
-    public String users(
+    public String getUser(
+            @RequestParam(defaultValue = "null") String name,
             Model model,
-            @PathVariable String username
-    ) {
-        model.addAttribute("user", serviceUser.loadUserByUsername(username));
+            RedirectAttributes redirectAttributes,
+            @RequestHeader(required = false) String referer) {
 
-        return "redirect:/user";
+        if (name.equals("null")) {
+            UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
+
+            components.getQueryParams()
+                    .forEach(redirectAttributes::addAttribute);
+
+            return "redirect:" + components.getPath();
+        } else {
+            model.addAttribute("user", serviceUser.findUser(name));
+            return "userSearch";
+        }
     }
 }

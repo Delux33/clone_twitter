@@ -22,6 +22,10 @@ public class ServiceMessage {
         }
     }
 
+    public void deleteMessage(Long id) {
+        messageRepo.deleteById(id);
+    }
+
     public Page<Message> messageListForUser(Pageable pageable, User author) {
         return messageRepo.findByUser(pageable, author);
     }

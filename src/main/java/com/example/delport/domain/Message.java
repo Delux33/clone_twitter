@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-
 @Entity
 public class Message {
     @Id
@@ -14,6 +13,7 @@ public class Message {
     @NotBlank(message = "Please fill the message")
     @Length(max = 1000, message = "Message too long")
     private String text;
+
     @Length(max = 255, message = "Message too long")
     private String tag;
 
