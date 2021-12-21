@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <h6>${username}</h6>
+    <h3>${username}</h3>
     ${message!}
     <form method="post">
         <div class="form-group">

@@ -11,10 +11,11 @@ public class Message {
     private Long id;
 
     @NotBlank(message = "Please fill the message")
-    @Length(max = 1000, message = "Message too long")
+    @Length(max = 1000, message = "Message too long, more than 1000")
     private String text;
 
-    @Length(max = 255, message = "Message too long")
+    @NotBlank(message = "Please fill this field, so other users can find your message using the tag")
+    @Length(max = 255, message = "Message too long, more than 255")
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)

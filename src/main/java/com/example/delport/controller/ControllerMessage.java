@@ -39,7 +39,7 @@ public class ControllerMessage {
     private String uploadPath;
 
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
+    public String greeting() {
 
         return "greeting";
     }
@@ -47,8 +47,8 @@ public class ControllerMessage {
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter,
                        Model model,
-                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-    ) {
+                       @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+
         Page<Message> page = serviceMessage.messageList(pageable, filter);
 
         model.addAttribute("page", page);
@@ -65,8 +65,8 @@ public class ControllerMessage {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file") MultipartFile file,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-    ) throws IOException {
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) throws IOException {
+
         message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
@@ -87,24 +87,7 @@ public class ControllerMessage {
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
 
-        return "redirect:/main";
-    }
-
-    private void saveFile(Message message, MultipartFile file) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            message.setFilename(resultFilename);
-        }
+        return "main";
     }
 
     @GetMapping("/user-messages/{author}")
@@ -113,8 +96,7 @@ public class ControllerMessage {
             @PathVariable User author,
             Model model,
             @RequestParam(required = false) Message message,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-    ) {
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<Message> page = serviceMessage.messageListForUser(pageable, author);
 
@@ -137,8 +119,8 @@ public class ControllerMessage {
             @RequestParam("id") Message message,
             @RequestParam("text") String text,
             @RequestParam("tag") String tag,
-            @RequestParam("file") MultipartFile file
-    ) throws IOException {
+            @RequestParam("file") MultipartFile file) throws IOException {
+
         if (message.getAuthor().equals(currentUser)) {
             if (StringUtils.hasText(text)) {
                 message.setText(text);
@@ -170,5 +152,23 @@ public class ControllerMessage {
                 .forEach(redirectAttributes::addAttribute);
 
         return "redirect:" + components.getPath();
+    }
+
+    private void saveFile(Message message, MultipartFile file) throws IOException {
+
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            message.setFilename(resultFilename);
+        }
     }
 }

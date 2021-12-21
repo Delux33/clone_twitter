@@ -89,38 +89,26 @@ body {
     margin-right: 6px;
 }
 
-.searchbar {
-    width: 200px;
-    margin-right: 6px;
-    height: 5px;
-    border: none;
-    outline: none;
-    border-radius: 10rem;
-    padding: 1rem;
-    transition: all .1s;
-    transition-delay: .1s;
-}
-
-.search-button {
-    top: 0.4rem;
-    right: 1.8rem;
-    transition: all .1s;
-    transition-delay: .1s;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-
-.search-button:hover {
-    cursor: pointer;
-}
-
-.searchbar::placeholder {
-    opacity: .2;
+.edit:after {
+    content: '\e802';
+    font-family: Linearicons-Free;
+    font-size: 15px;
 }
 
 .add-user-button:after {
     content: '\e82a';
+    color: #383d48;
+    font-family: Linearicons-Free;
+    line-height: 0;
+    font-size: 25px;
+    position: relative;
+    top: 0.5rem;
+    left: 0.5rem;
+    text-decoration: none;
+}
+
+.list-of-users:after {
+    content: '\e82b';
     color: #383d48;
     font-family: Linearicons-Free;
     line-height: 0;

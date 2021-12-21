@@ -3,8 +3,10 @@ package com.example.delport.controller;
 import com.example.delport.domain.Role;
 import com.example.delport.domain.User;
 import com.example.delport.service.ServiceUser;
-import com.jayway.jsonpath.internal.filter.ValueNodes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -34,6 +37,7 @@ public class ControllerUser {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
+
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
 
@@ -74,8 +78,7 @@ public class ControllerUser {
     @GetMapping("subscribe/{user}")
     public String subscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-    ) {
+            @PathVariable User user) {
 
         serviceUser.subscribe(currentUser, user);
 
@@ -85,8 +88,7 @@ public class ControllerUser {
     @GetMapping("unsubscribe/{user}")
     public String unsubscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-    ) {
+            @PathVariable User user) {
 
         serviceUser.unsubscribe(currentUser, user);
 
@@ -97,8 +99,7 @@ public class ControllerUser {
     public String userList(
             Model model,
             @PathVariable User user,
-            @PathVariable String type
-    ) {
+            @PathVariable String type) {
 
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);

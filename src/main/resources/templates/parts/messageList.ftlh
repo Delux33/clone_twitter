@@ -2,7 +2,6 @@
 <#import "pager.ftlh" as p>
 
 <@p.pager url page />
-
 <div class="card-columns" id="message-list">
     <#list page.content as message>
         <div class="card my-3" data-id="${message.id}">
@@ -31,8 +30,7 @@
             </div>
         </div>
     <#else>
-        No message
+        <h3>No messages</h3>
     </#list>
 </div>
-
 <@p.pager url page />

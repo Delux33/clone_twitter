@@ -3,7 +3,9 @@
 <@c.page>
     <form action="/user" method="post">
         <div class="form-group">
-            <label class="col-form-label">User name</label>
+            <label class="col-form-label">
+                <h3>User name</h3>
+            </label>
             <input class="form-control col-sm-3 mb-1" type="text" name="username" value="${user.username}" placeholder="Username">
         </div>
         <#list roles as role>
@@ -14,6 +16,6 @@
         </#list>
         <input type="hidden" value="${user.id}" name="userId">
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button class="btn btn-outline-secondary" type="submit">Save</button>
+        <button class="btn btn-outline-success" type="submit">Save</button>
     </form>
 </@c.page>

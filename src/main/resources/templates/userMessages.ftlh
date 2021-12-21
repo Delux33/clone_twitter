@@ -35,7 +35,6 @@
         <#if isCurrentUser>
             <#include "parts/messageEdit.ftlh" />
         </#if>
-
         <#include "parts/messageList.ftlh" />
     </div>
 </@c.page>

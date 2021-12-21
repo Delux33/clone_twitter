@@ -29,7 +29,7 @@ public class LoginTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello, guest!")))
-                .andExpect(content().string(containsString("This is a simple site like the twitter and stepik")))
+                .andExpect(content().string(containsString("This is a simple site like the twitter")))
                 .andExpect(content().string(containsString("You can post to write about your courses")));
     }
 

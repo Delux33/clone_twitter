@@ -54,11 +54,6 @@ public class ControllerRegistration {
         }
 
         boolean isConfirmNotEmpty = StringUtils.hasText(passwordConfirm);
-
-        if (!isConfirmNotEmpty) {
-            model.addAttribute("password2Error", "Password confirmation can not be empty");
-        }
-
         if (user.getPassword() != null && !user.getPassword().equals(passwordConfirm)) {
             model.addAttribute("passwordError", "Passwords are different");
             return "registration";
@@ -66,22 +61,20 @@ public class ControllerRegistration {
 
         if (!isConfirmNotEmpty || bindingResult.hasErrors() || !Objects.requireNonNull(response).isSuccess()) {
             Map<String, String> errors = ControllerError.getErrors(bindingResult);
-
             model.mergeAttributes(errors);
-
             return "registration";
         }
 
         if (!userService.addUser(user)) {
-            model.addAttribute("usernameError", "User exists!");
+            model.addAttribute("usernameError", "User exists");
             return "registration";
         }
-
         return "redirect:/login";
     }
 
     @GetMapping("/activate/{code}")
     public String activate(Model model, @PathVariable String code) {
+
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
@@ -89,9 +82,8 @@ public class ControllerRegistration {
             model.addAttribute("message", "User successfully activated");
         } else {
             model.addAttribute("messageType", "danger");
-            model.addAttribute("message", "Activation code is not found!");
+            model.addAttribute("message", "Activation code is not found");
         }
-
         return "login";
     }
 }

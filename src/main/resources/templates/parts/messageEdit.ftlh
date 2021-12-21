@@ -15,7 +15,7 @@
                 </#if>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control"
+                <input type="text" class="form-control ${(tagError??)?string('is-invalid', '')}"
                        value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Tag">
                 <#if tagError??>
                     <div class="invalid-feedback">
@@ -29,9 +29,12 @@
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
             </div>
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <input type="hidden" name="id" value="<#if message??>${message.id}</#if>"/>
+            <#if textError?? || tagError??>
+            <#else>
+                <input type="hidden" name="id" value="<#if message??>${message.id}</#if>"/>
+            </#if>
             <div class="form-group">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <button type="submit" class="btn btn-success">Save message</button>
             </div>
         </form>
