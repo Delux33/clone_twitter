@@ -8,7 +8,7 @@
                     <input type="text" name="filter" class="form-control" value="${filter!}"
                            placeholder="Search by tag"/>
                 </label>
-                <button type="submit" class="btn btn-outline-secondary ml-2">Start</button>
+                <button type="submit" class="btn btn-outline-secondary ml-2">Search</button>
             </form>
         </div>
     </div>

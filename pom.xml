@@ -84,11 +84,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<version>5.5.2</version>
 		</dependency>
-        <dependency>
-            <groupId>com.delport</groupId>
-            <artifactId>site</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
     </dependencies>
 

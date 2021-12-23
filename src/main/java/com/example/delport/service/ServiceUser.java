@@ -58,12 +58,12 @@ public class ServiceUser implements UserDetailsService {
         if (StringUtils.hasText(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to Delport. Please, visit next link: http://localhost:8080/activate/%s",
+                            "Welcome to Delport. Please, visit next link for activation: http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
 
-            mailService.send(user.getEmail(), "Activation code", message);
+            mailService.send(user.getEmail(), "Delport - activation code", message);
         }
     }
 

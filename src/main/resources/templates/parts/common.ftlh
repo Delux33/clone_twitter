@@ -15,7 +15,7 @@
               crossorigin="anonymous"/>
         <script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
         <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"/>
     </head>
     <body>
     <#include "navbar.ftlh">

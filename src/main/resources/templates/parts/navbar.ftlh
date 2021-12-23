@@ -24,7 +24,7 @@
                     <input type="text" name="name" maxlength="20" class="form-control mr-sm-2"
                            placeholder="Search users"/>
                     <button class="btn btn-outline-secondary" type="submit">
-                        Search
+                        Go
                     </button>
                 </form>
             </#if>

@@ -23,7 +23,7 @@
                         <form method="post" action="/user-messages">
                             <input type="hidden" name="messageId" value="${message.id}"/>
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                            <button class="col btn btn-light" type="submit">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger">X</button>
                         </form>
                     </#if>
                 </div>
