@@ -1,1 +1,1 @@
-# This is a simple site like twitter
+# Простой клон твиттера, с минимальным функционалом
