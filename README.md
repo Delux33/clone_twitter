@@ -1,6 +1,6 @@
 # Примитивный клон twitter'a
 
-***Задача проекта - получить опыт работы с такими технологиями как Spring, Freemarker, Bootstrap, Hibernate, Maven***
+***Задача проекта - получить опыт работы с такими технологиями как Spring, Freemarker, Bootstrap, Hibernate, Maven, MySQL.***
 ____
 
 Начальная страница при входе
